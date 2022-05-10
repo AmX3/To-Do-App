@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ITheme } from "../theme/";
+import { ITheme } from "../theme";
 
 interface CardProps {
     theme: ITheme;
@@ -17,6 +17,7 @@ export const StyledCard = styled.div`
 
 export const Heading = styled.h1`
     text-align: center;
+    color: ${(props: CardProps) => props.theme.colors["dark"]};
 `;
 
 export const Label = styled.label`

@@ -12,8 +12,8 @@ import {
     Icon,
     Label,
     SmallHeading,
-} from "./components/StyledCard";
-import { StyledMain } from "./components/StyledMain";
+} from "./styles/StyledCard";
+import { StyledMain } from "./styles/StyledMain";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { useState, ChangeEvent } from "react";
@@ -21,22 +21,33 @@ import { ITask } from "./interfaces/interface";
 import TodoTask from "./components/TodoTask";
 
 const App: React.FC = () => {
-    const [task, setTask] = useState<string>("");
+    const [tasks, setTasks] = useState<string>("");
     const [detail, setDetail] = useState<string>("");
     const [todoList, setTodoList] = useState<ITask[]>([]);
 
-    // every function needs a return. If the function does not return anything, we are going to insert a void
+    // every function needs a return. If the function does not return anything, we are going to insert a void keyword
     const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
-        setTask(e.target.value);
+        setTasks(e.target.value);
     };
 
+    // In addtask, if tasks input is empty, we do nothing, else we add our new task (object) to our array of tasks in todoList
     const addTask = (): void => {
-        const newTask = { name: task, details: detail };
-        setTodoList([...todoList, newTask]);
+        const newTask = { name: tasks, details: detail };
+        if (tasks.length == 0) {
+            return;
+        } else {
+            setTodoList([...todoList, newTask]);
+        }
+
         console.log(todoList);
         // reset task after every submit
-        setTask("");
+        setTasks("");
         setDetail("");
+    };
+
+    // Filtering through our todo list and will only return back tasks that have not been deleted. If task name matches our soon to be deleted task, it will delete task.
+    const deleteTask = (taskNameDelete: string): void => {
+        setTodoList(todoList.filter((task) => task.name != taskNameDelete));
     };
 
     return (
@@ -49,7 +60,7 @@ const App: React.FC = () => {
                         <hr />
                         <Label>Add Task:</Label>
                         <Container>
-                            <Field value={task} onChange={handleChange} />
+                            <Field value={tasks} onChange={handleChange} />
                             <Icon>
                                 <FontAwesomeIcon
                                     icon={faCirclePlus}
@@ -61,12 +72,17 @@ const App: React.FC = () => {
                         <SmallHeading>
                             You have {todoList.length} tasks left!
                         </SmallHeading>
-                        <div className="todoList">
-                            {/* In our todolist, we want to map through each of our task. Each task needs a unique key otherwise React will not like it */}
-                            {todoList.map((task: ITask, key: number) => {
-                                return <TodoTask task={task} key={key} />;
-                            })}
-                        </div>
+
+                        {/* In our todolist, we want to map through each of our task. Each task needs a unique key otherwise React will not like it */}
+                        {todoList.map((tasks: ITask, key: number) => {
+                            return (
+                                <TodoTask
+                                    task={tasks}
+                                    key={key}
+                                    deleteTask={deleteTask}
+                                />
+                            );
+                        })}
                     </StyledCard>
                 </StyledMain>
             </ThemeProvider>
