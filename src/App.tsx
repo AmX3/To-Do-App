@@ -10,7 +10,6 @@ import {
     Field,
     Heading,
     Icon,
-    Label,
     SmallHeading,
 } from "./styles/StyledCard";
 import { StyledMain } from "./styles/StyledMain";
@@ -24,6 +23,11 @@ const App: React.FC = () => {
     const [tasks, setTasks] = useState<string>("");
     const [detail, setDetail] = useState<string>("");
     const [todoList, setTodoList] = useState<ITask[]>([]);
+    const [checked, setChecked] = useState<boolean>(false);
+
+    const handleChecked = (e: ChangeEvent<HTMLInputElement>): void => {
+        setChecked(e.target.checked);
+    };
 
     // every function needs a return. If the function does not return anything, we are going to insert a void keyword
     const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -58,9 +62,12 @@ const App: React.FC = () => {
                     <StyledCard>
                         <Heading>TODOLIST</Heading>
                         <hr />
-                        <Label>Add Task:</Label>
                         <Container>
-                            <Field value={tasks} onChange={handleChange} />
+                            <Field
+                                value={tasks}
+                                onChange={handleChange}
+                                placeholder="Add a Task"
+                            />
                             <Icon>
                                 <FontAwesomeIcon
                                     icon={faCirclePlus}
@@ -70,7 +77,7 @@ const App: React.FC = () => {
                             </Icon>
                         </Container>
                         <SmallHeading>
-                            You have {todoList.length} tasks left!
+                            You have {todoList.length} pending task(s) left!
                         </SmallHeading>
 
                         {/* In our todolist, we want to map through each of our task. Each task needs a unique key otherwise React will not like it */}
@@ -80,6 +87,8 @@ const App: React.FC = () => {
                                     task={tasks}
                                     key={key}
                                     deleteTask={deleteTask}
+                                    handleChecked={handleChecked}
+                                    isChecked={checked}
                                 />
                             );
                         })}

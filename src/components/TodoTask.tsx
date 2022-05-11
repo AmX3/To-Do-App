@@ -1,20 +1,25 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import { ITask } from "../interfaces/interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { Container, Icon, Task } from "../styles/StyledTodoTask";
+import { Checkbox, Container, Icon, Task } from "../styles/StyledTodoTask";
 
 // here we define the properties that our todotask(an object) will have
 interface Props {
     task: ITask;
     deleteTask(taskNameDelete: string): void;
+    handleChecked: (e: ChangeEvent<HTMLInputElement>) => void;
+    isChecked: boolean;
 }
 
-const TodoTask = ({ task, deleteTask }: Props) => {
+const TodoTask = ({ task, deleteTask, isChecked, handleChecked }: Props) => {
     return (
         <div>
             <Container>
-                <Task>{task.name}</Task>
+                <Task>
+                    <Checkbox type="checkbox" />
+                    {task.name}
+                </Task>
                 <Icon>
                     <FontAwesomeIcon
                         size={"lg"}

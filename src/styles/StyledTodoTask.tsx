@@ -19,7 +19,13 @@ export const Icon = styled.div`
     }
 `;
 
-export const Task = styled.div`
+export const Checkbox = styled.input`
+    height: 20px;
+    width: 20px;
+    margin-right: 20px;
+`;
+
+export const Task = styled.label`
     width: 100%;
     padding: 15px 10px;
     border: none;

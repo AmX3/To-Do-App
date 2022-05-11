@@ -7,7 +7,7 @@ interface CardProps {
 
 export const StyledCard = styled.div`
     width: 500px;
-    height: 500px;
+    height: 100%;
     background-color: ${(props: CardProps) => props.theme.colors["light"]};
     border-radius: 20px;
     display: flex;
