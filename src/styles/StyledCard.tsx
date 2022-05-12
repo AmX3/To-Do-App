@@ -25,21 +25,7 @@ export const Label = styled.label`
     font-size: 16px;
 `;
 
-export const Container = styled.div`
-    display: flex;
-    align-items: center;
-`;
-
-export const Icon = styled.div`
-    & * {
-        color: ${(props: CardProps) => props.theme.colors["secondary"]};
-        transition: all 0.3s;
-        margin-left: 15px;
-        cursor: pointer;
-    }
-`;
-
-export const Field = styled.input`
+export const InputField = styled.input`
     width: 100%;
     padding: 15px 10px;
     border: none;

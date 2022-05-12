@@ -1,5 +1,6 @@
-// each element within Itask would be an task
+// each element within Itask would be an task. Interface lists our the given properties of each task
 export interface ITask {
-    name: string;
-    details: string;
+    id: number;
+    task: string;
+    isCompleted: boolean;
 }

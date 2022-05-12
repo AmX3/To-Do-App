@@ -1,57 +1,35 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { ThemeProvider } from "styled-components";
 import "./App.css";
 import theme from "./theme";
 import { ITheme } from "./theme";
 import GlobalPageStylingProvider from "./theme/Global/GlobalPageStylingProvider";
-import {
-    StyledCard,
-    Container,
-    Field,
-    Heading,
-    Icon,
-    SmallHeading,
-} from "./styles/StyledCard";
+import { StyledCard, Heading, SmallHeading } from "./styles/StyledCard";
 import { StyledMain } from "./styles/StyledMain";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
-import { useState, ChangeEvent } from "react";
+import { useState } from "react";
 import { ITask } from "./interfaces/interface";
-import TodoTask from "./components/TodoTask";
+import TodoList from "./components/TodoList";
+import InputField from "./components/InputField";
 
 const App: React.FC = () => {
-    const [tasks, setTasks] = useState<string>("");
-    const [detail, setDetail] = useState<string>("");
-    const [todoList, setTodoList] = useState<ITask[]>([]);
-    const [checked, setChecked] = useState<boolean>(false);
+    const [task, setTask] = useState<string>("");
+    const [tasks, setTasks] = useState<ITask[]>([]);
+    const [checked, setChecked] = useState(false);
 
     const handleChecked = (e: ChangeEvent<HTMLInputElement>): void => {
         setChecked(e.target.checked);
     };
 
-    // every function needs a return. If the function does not return anything, we are going to insert a void keyword
-    const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
-        setTasks(e.target.value);
-    };
-
     // In addtask, if tasks input is empty, we do nothing, else we add our new task (object) to our array of tasks in todoList
-    const addTask = (): void => {
-        const newTask = { name: tasks, details: detail };
-        if (tasks.length == 0) {
+    const handleAddTask = () => {
+        const newTask = { id: Date.now(), task, isCompleted: false };
+        if (task.length == 0) {
             return;
         } else {
-            setTodoList([...todoList, newTask]);
+            setTasks([...tasks, newTask]);
+            // reset task after every submit
+            setTask("");
         }
-
-        console.log(todoList);
-        // reset task after every submit
-        setTasks("");
-        setDetail("");
-    };
-
-    // Filtering through our todo list and will only return back tasks that have not been deleted. If task name matches our soon to be deleted task, it will delete task.
-    const deleteTask = (taskNameDelete: string): void => {
-        setTodoList(todoList.filter((task) => task.name != taskNameDelete));
     };
 
     return (
@@ -62,36 +40,18 @@ const App: React.FC = () => {
                     <StyledCard>
                         <Heading>TODOLIST</Heading>
                         <hr />
-                        <Container>
-                            <Field
-                                value={tasks}
-                                onChange={handleChange}
-                                placeholder="Add a Task"
-                            />
-                            <Icon>
-                                <FontAwesomeIcon
-                                    icon={faCirclePlus}
-                                    size={"lg"}
-                                    onClick={addTask}
-                                />
-                            </Icon>
-                        </Container>
+                        <InputField
+                            task={task}
+                            setTask={setTask}
+                            handleAddTask={handleAddTask}
+                        />
                         <SmallHeading>
-                            You have {todoList.length} pending task(s) left!
+                            You have {tasks.length} pending task(s) left!
                         </SmallHeading>
-
-                        {/* In our todolist, we want to map through each of our task. Each task needs a unique key otherwise React will not like it */}
-                        {todoList.map((tasks: ITask, key: number) => {
-                            return (
-                                <TodoTask
-                                    task={tasks}
-                                    key={key}
-                                    deleteTask={deleteTask}
-                                    handleChecked={handleChecked}
-                                    isChecked={checked}
-                                />
-                            );
-                        })}
+                        {/* In our todolist, we want to map through each of our
+                        task. Each task needs a unique key otherwise React will
+                        not like it */}
+                        <TodoList tasks={tasks} setTasks={setTasks} />
                     </StyledCard>
                 </StyledMain>
             </ThemeProvider>
