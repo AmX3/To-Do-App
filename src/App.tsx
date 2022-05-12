@@ -14,11 +14,11 @@ import InputField from "./components/InputField";
 const App: React.FC = () => {
     const [task, setTask] = useState<string>("");
     const [tasks, setTasks] = useState<ITask[]>([]);
-    const [checked, setChecked] = useState(false);
+    const [completedTasks, setCompletedTasks] = useState<ITask[]>([]);
 
-    const handleChecked = (e: ChangeEvent<HTMLInputElement>): void => {
-        setChecked(e.target.checked);
-    };
+    // const handleChecked = (e: ChangeEvent<HTMLInputElement>): void => {
+    //     setChecked(e.target.checked);
+    // };
 
     // In addtask, if tasks input is empty, we do nothing, else we add our new task (object) to our array of tasks in todoList
     const handleAddTask = () => {
@@ -51,7 +51,12 @@ const App: React.FC = () => {
                         {/* In our todolist, we want to map through each of our
                         task. Each task needs a unique key otherwise React will
                         not like it */}
-                        <TodoList tasks={tasks} setTasks={setTasks} />
+                        <TodoList
+                            tasks={tasks}
+                            setTasks={setTasks}
+                            completedTasks={completedTasks}
+                            setCompletedTasks={setCompletedTasks}
+                        />
                     </StyledCard>
                 </StyledMain>
             </ThemeProvider>

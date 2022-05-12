@@ -5,10 +5,11 @@ import TodoTask from "./TodoTask";
 interface Props {
     tasks: ITask[];
     setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
-    // handleChecked: (e: ChangeEvent<HTMLInputElement>) => void;
+    completedTasks: ITask[];
+    setCompletedTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
 }
 
-const TodoList: React.FC<Props> = ({ tasks, setTasks }) => {
+const TodoList: React.FC<Props> = ({ tasks, setTasks, setCompletedTasks }) => {
     return (
         <>
             {tasks.map((task: ITask, key: number) => {

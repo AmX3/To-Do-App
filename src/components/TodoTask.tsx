@@ -8,7 +8,6 @@ import { Checkbox, Container, Icon, Task } from "../styles/StyledTodoTask";
 interface Props {
     task: ITask;
     tasks: ITask[];
-    // handleChecked: (e: ChangeEvent<HTMLInputElement>) => void;
     setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
 }
 
