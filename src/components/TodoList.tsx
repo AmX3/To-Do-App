@@ -1,19 +1,51 @@
-import React, { ChangeEvent } from "react";
 import { ITask } from "../interfaces/interface";
-import { SmallHeading } from "../styles/StyledCard";
+import { SubHeading } from "../styles/StyledCard";
 import TodoTask from "./TodoTask";
 
-interface Props {
+// Everytime we pass down props, we create an interface where we are able to access these properties.
+// We also define its type here.
+interface ITodoListProps {
     tasks: ITask[];
     setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
-    completedTasks: ITask[];
-    setCompletedTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
 }
 
-const TodoList: React.FC<Props> = ({ tasks, setTasks, setCompletedTasks }) => {
+/* In our todolist, we want to map through each of our task. Each task needs a unique key */
+
+const TodoList: React.FC<ITodoListProps> = ({ tasks, setTasks }) => {
+    const handleCompletedTasks = (taskId: number) => {
+        // clone the original array to avoid mutate by reference
+        let updatedTodos = [...tasks];
+        // find the todo based on todo id
+        let selectedTodo = tasks.find((task) => task.id === taskId);
+        // find the todo index based on todo id
+        let selectedTodoId = tasks.findIndex((task) => task.id === taskId);
+
+        // if selectedTodo is valid, we then update our tasks array
+        if (selectedTodo) {
+            updatedTodos[selectedTodoId] = {
+                ...selectedTodo,
+                isCompleted: !selectedTodo.isCompleted,
+            };
+            setTasks(updatedTodos);
+        }
+    };
+
+    // const handleDone = (id: number): void => {
+    //     setTasks(
+    //         tasks.map((task) =>
+    //             task.id === id
+    //                 ? { ...task, isCompleted: !task.isCompleted }
+    //                 : task
+    //         )
+    //     );
+    // };
+
     return (
         <>
-            <SmallHeading>Pending Tasks</SmallHeading>
+            <SubHeading>
+                {tasks.filter((task) => task.isCompleted === false).length}{" "}
+                pending tasks left
+            </SubHeading>
             <div>
                 {tasks
                     .filter((task) => task.isCompleted === false)
@@ -23,11 +55,14 @@ const TodoList: React.FC<Props> = ({ tasks, setTasks, setCompletedTasks }) => {
                             key={key}
                             tasks={tasks}
                             setTasks={setTasks}
-                            setCompletedTasks={setCompletedTasks}
+                            completedTasks={handleCompletedTasks}
                         />
                     ))}
             </div>
-            <SmallHeading>Completed Tasks</SmallHeading>
+            <SubHeading>
+                {tasks.filter((task) => task.isCompleted === true).length}{" "}
+                completed tasks
+            </SubHeading>
             <div>
                 {tasks
                     .filter((task) => task.isCompleted === true)
@@ -37,7 +72,7 @@ const TodoList: React.FC<Props> = ({ tasks, setTasks, setCompletedTasks }) => {
                             key={key}
                             tasks={tasks}
                             setTasks={setTasks}
-                            setCompletedTasks={setCompletedTasks}
+                            completedTasks={handleCompletedTasks}
                         />
                     ))}
             </div>
