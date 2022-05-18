@@ -4,7 +4,7 @@ import "./App.css";
 import theme from "./theme";
 import { ITheme } from "./theme";
 import GlobalPageStylingProvider from "./theme/Global/GlobalPageStylingProvider";
-import { StyledCard, Heading, SmallHeading } from "./styles/StyledCard";
+import { StyledCard, Heading } from "./styles/StyledCard";
 import { StyledMain } from "./styles/StyledMain";
 import { useState } from "react";
 import { ITask } from "./interfaces/interface";
@@ -14,11 +14,6 @@ import InputField from "./components/InputField";
 const App: React.FC = () => {
     const [task, setTask] = useState<string>("");
     const [tasks, setTasks] = useState<ITask[]>([]);
-    const [completedTasks, setCompletedTasks] = useState<ITask[]>([]);
-
-    // const handleChecked = (e: ChangeEvent<HTMLInputElement>): void => {
-    //     setChecked(e.target.checked);
-    // };
 
     // In addtask, if tasks input is empty, we do nothing, else we add our new task (object) to our array of tasks in todoList
     const handleAddTask = () => {
@@ -27,7 +22,7 @@ const App: React.FC = () => {
             return;
         } else {
             setTasks([...tasks, newTask]);
-            // reset task after every submit
+            // reset input field after every submit
             setTask("");
         }
     };
@@ -39,24 +34,12 @@ const App: React.FC = () => {
                 <StyledMain>
                     <StyledCard>
                         <Heading>TODOLIST</Heading>
-                        <hr />
                         <InputField
                             task={task}
                             setTask={setTask}
                             handleAddTask={handleAddTask}
                         />
-                        <SmallHeading>
-                            You have {tasks.length} pending task(s) left!
-                        </SmallHeading>
-                        {/* In our todolist, we want to map through each of our
-                        task. Each task needs a unique key otherwise React will
-                        not like it */}
-                        <TodoList
-                            tasks={tasks}
-                            setTasks={setTasks}
-                            completedTasks={completedTasks}
-                            setCompletedTasks={setCompletedTasks}
-                        />
+                        <TodoList tasks={tasks} setTasks={setTasks} />
                     </StyledCard>
                 </StyledMain>
             </ThemeProvider>

@@ -4,20 +4,22 @@ import { ITheme } from "../theme";
 interface InputProps {
     theme: ITheme;
 }
+
 export const Container = styled.div`
     display: flex;
     align-items: center;
+    justify-content: center;
 `;
 
 export const Input = styled.input`
     width: 100%;
-    padding: 15px 10px;
+    padding: 15px 20px;
     border: none;
     outline: none;
     border-radius: 5px;
     background: ${(props: InputProps) => props.theme.colors["body"]};
     border-radius: 20px;
-    margin: 10px 0;
+    font-size: 16px;
 `;
 
 export const Icon = styled.div`

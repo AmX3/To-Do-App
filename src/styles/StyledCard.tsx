@@ -36,4 +36,4 @@ export const InputField = styled.input`
     margin: 10px 0;
 `;
 
-export const SmallHeading = styled.h3``;
+export const SubHeading = styled.h3``;

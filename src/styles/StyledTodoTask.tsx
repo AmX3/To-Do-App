@@ -20,12 +20,12 @@ export const Icon = styled.div`
 `;
 
 export const Checkbox = styled.input`
-    height: 20px;
-    width: 20px;
+    height: 15px;
+    width: 15px;
     margin-right: 20px;
 `;
 
-export const Task = styled.label`
+export const Task = styled.span`
     width: 100%;
     padding: 15px 10px;
     border: none;
@@ -34,4 +34,17 @@ export const Task = styled.label`
     background: ${(props: TaskProps) => props.theme.colors["body"]};
     border-radius: 20px;
     margin: 10px 0;
+`;
+
+export const CompletedTask = styled.span`
+    width: 100%;
+    padding: 15px 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background: ${(props: TaskProps) => props.theme.colors["body"]};
+    border-radius: 20px;
+    margin: 10px 0;
+    opacity: 0.5;
+    align-items: center;
 `;
