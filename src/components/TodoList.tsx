@@ -1,5 +1,6 @@
 import React, { ChangeEvent } from "react";
 import { ITask } from "../interfaces/interface";
+import { SmallHeading } from "../styles/StyledCard";
 import TodoTask from "./TodoTask";
 
 interface Props {
@@ -12,16 +13,32 @@ interface Props {
 const TodoList: React.FC<Props> = ({ tasks, setTasks, setCompletedTasks }) => {
     return (
         <>
-            {tasks.map((task: ITask, key: number) => {
-                return (
-                    <TodoTask
-                        task={task}
-                        key={key}
-                        tasks={tasks}
-                        setTasks={setTasks}
-                    />
-                );
-            })}
+            <div>
+                {tasks
+                    .filter((task) => task.isCompleted === false)
+                    .map((task: ITask, key: number) => (
+                        <TodoTask
+                            task={task}
+                            key={key}
+                            tasks={tasks}
+                            setTasks={setTasks}
+                            setCompletedTasks={setCompletedTasks}
+                        />
+                    ))}
+            </div>
+            <div>
+                {tasks
+                    .filter((task) => task.isCompleted === true)
+                    .map((task: ITask, key: number) => (
+                        <TodoTask
+                            task={task}
+                            key={key}
+                            tasks={tasks}
+                            setTasks={setTasks}
+                            setCompletedTasks={setCompletedTasks}
+                        />
+                    ))}
+            </div>
         </>
     );
 };

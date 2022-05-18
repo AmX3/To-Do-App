@@ -4,7 +4,7 @@ import "./App.css";
 import theme from "./theme";
 import { ITheme } from "./theme";
 import GlobalPageStylingProvider from "./theme/Global/GlobalPageStylingProvider";
-import { StyledCard, Heading, SmallHeading } from "./styles/StyledCard";
+import { StyledCard, Heading } from "./styles/StyledCard";
 import { StyledMain } from "./styles/StyledMain";
 import { useState } from "react";
 import { ITask } from "./interfaces/interface";
@@ -45,9 +45,6 @@ const App: React.FC = () => {
                             setTask={setTask}
                             handleAddTask={handleAddTask}
                         />
-                        <SmallHeading>
-                            You have {tasks.length} pending task(s) left!
-                        </SmallHeading>
                         {/* In our todolist, we want to map through each of our
                         task. Each task needs a unique key otherwise React will
                         not like it */}

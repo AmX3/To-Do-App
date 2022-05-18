@@ -9,9 +9,10 @@ interface Props {
     task: ITask;
     tasks: ITask[];
     setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
+    setCompletedTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
 }
 
-const TodoTask = ({ task, tasks, setTasks }: Props) => {
+const TodoTask = ({ task, tasks, setTasks, setCompletedTasks }: Props) => {
     const handleDone = (id: number): void => {
         setTasks(
             tasks.map((task) =>
@@ -36,11 +37,14 @@ const TodoTask = ({ task, tasks, setTasks }: Props) => {
                         onClick={() => handleDone(task.id)}
                     />
                     {task.isCompleted ? (
-                        <s> {task.task}</s>
+                        <>
+                            <s> {task.task}</s>
+                        </>
                     ) : (
                         <span> {task.task}</span>
                     )}
                 </Task>
+
                 <Icon>
                     <FontAwesomeIcon
                         size={"lg"}
