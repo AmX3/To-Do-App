@@ -13,6 +13,7 @@ interface Props {
 const TodoList: React.FC<Props> = ({ tasks, setTasks, setCompletedTasks }) => {
     return (
         <>
+            <SmallHeading>Tasks</SmallHeading>
             <div>
                 {tasks
                     .filter((task) => task.isCompleted === false)
