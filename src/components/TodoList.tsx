@@ -13,7 +13,7 @@ interface Props {
 const TodoList: React.FC<Props> = ({ tasks, setTasks, setCompletedTasks }) => {
     return (
         <>
-            <SmallHeading>Tasks</SmallHeading>
+            <SmallHeading>Pending Tasks</SmallHeading>
             <div>
                 {tasks
                     .filter((task) => task.isCompleted === false)
@@ -27,6 +27,7 @@ const TodoList: React.FC<Props> = ({ tasks, setTasks, setCompletedTasks }) => {
                         />
                     ))}
             </div>
+            <SmallHeading>Completed Tasks</SmallHeading>
             <div>
                 {tasks
                     .filter((task) => task.isCompleted === true)
