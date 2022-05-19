@@ -15,6 +15,10 @@ export const Icon = styled.div`
         color: ${(props: TaskProps) => props.theme.colors["secondary"]};
         transition: all 0.3s;
         margin-left: 15px;
+    }
+
+    &:hover * {
+        transform: scale(0.95);
         cursor: pointer;
     }
 `;

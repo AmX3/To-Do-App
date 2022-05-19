@@ -24,12 +24,10 @@ const theme: ITheme = {
     colors: {
         primary: "#006AFF",
         secondary: "#00B2FF",
-        header: "#351762",
-        header2: "#F43268",
         body: "#F1F6FE",
-        body2: "#666666",
         light: "#FFFFFF",
-        dark: "#222222",
+        lightred: "#f28482",
+        red: "#e63946",
     },
     fonts: {
         header: "Calibri",

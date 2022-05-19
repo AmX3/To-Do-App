@@ -24,9 +24,14 @@ export const Input = styled.input`
 
 export const Icon = styled.div`
     & * {
-        color: ${(props: InputProps) => props.theme.colors["secondary"]};
+        color: ${(props: InputProps) => props.theme.colors["lightred"]};
         transition: all 0.3s;
         margin-left: 15px;
+    }
+
+    &:hover * {
+        transform: scale(0.95);
         cursor: pointer;
+        color: ${(props: InputProps) => props.theme.colors["red"]};
     }
 `;

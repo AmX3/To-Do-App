@@ -30,16 +30,6 @@ const TodoList: React.FC<ITodoListProps> = ({ tasks, setTasks }) => {
         }
     };
 
-    // const handleDone = (id: number): void => {
-    //     setTasks(
-    //         tasks.map((task) =>
-    //             task.id === id
-    //                 ? { ...task, isCompleted: !task.isCompleted }
-    //                 : task
-    //         )
-    //     );
-    // };
-
     return (
         <>
             <SubHeading>

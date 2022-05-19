@@ -26,7 +26,7 @@ const App: React.FC = () => {
             setTask("");
         }
     };
-
+    // basename = "/E-Commerce-React-Application";
     return (
         <>
             <ThemeProvider theme={theme}>
