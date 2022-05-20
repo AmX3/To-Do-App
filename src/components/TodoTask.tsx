@@ -2,13 +2,7 @@ import React, { ChangeEvent, useState } from "react";
 import { ITask } from "../interfaces/interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import {
-    Checkbox,
-    CompletedTask,
-    Container,
-    Icon,
-    Task,
-} from "../styles/StyledTodoTask";
+import { Checkbox, Container, Icon, Task } from "../styles/StyledTodoTask";
 
 // here we define the properties that our todotask(an object) will have
 interface ITodoTaskProps {
@@ -33,16 +27,16 @@ const TodoTask: React.FC<ITodoTaskProps> = ({
         <div>
             <Container>
                 {task.isCompleted ? (
-                    <CompletedTask>
+                    <Task isCompleted={task.isCompleted}>
                         <Checkbox
                             type="checkbox"
                             checked={task.isCompleted}
                             onChange={() => completedTasks(task.id)}
                         />
                         <s> {task.task}</s>
-                    </CompletedTask>
+                    </Task>
                 ) : (
-                    <Task>
+                    <Task isCompleted={task.isCompleted}>
                         <Checkbox
                             type="checkbox"
                             checked={task.isCompleted}

@@ -3,6 +3,7 @@ import { ITheme } from "../theme";
 
 interface TaskProps {
     theme: ITheme;
+    isCompleted: boolean;
 }
 
 export const Container = styled.div`
@@ -12,7 +13,7 @@ export const Container = styled.div`
 
 export const Icon = styled.div`
     & * {
-        color: ${(props: TaskProps) => props.theme.colors["secondary"]};
+        color: ${(props) => props.theme.colors["secondary"]};
         transition: all 0.3s;
         margin-left: 15px;
     }
@@ -29,26 +30,15 @@ export const Checkbox = styled.input`
     margin-right: 20px;
 `;
 
+// Reusable task component. If tasks is completed, it will change opacity. Must declare isCompleted and type in our interface
 export const Task = styled.span`
     width: 100%;
     padding: 15px 10px;
     border: none;
     outline: none;
     border-radius: 5px;
-    background: ${(props: TaskProps) => props.theme.colors["body"]};
+    background: ${(props) => props.theme.colors["body"]};
     border-radius: 20px;
     margin: 10px 0;
-`;
-
-export const CompletedTask = styled.span`
-    width: 100%;
-    padding: 15px 10px;
-    border: none;
-    outline: none;
-    border-radius: 5px;
-    background: ${(props: TaskProps) => props.theme.colors["body"]};
-    border-radius: 20px;
-    margin: 10px 0;
-    opacity: 0.5;
-    align-items: center;
+    opacity: ${(props: TaskProps) => (props.isCompleted ? 0.5 : 1)};
 `;
