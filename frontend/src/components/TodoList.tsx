@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { ITask } from "../interfaces/interface";
 import { SubHeading } from "../styles/StyledCard";
 import TodoTask from "./TodoTask";
@@ -42,7 +43,7 @@ const TodoList: React.FC<ITodoListProps> = ({ tasks, setTasks }) => {
                     .map((task: ITask, key: number) => (
                         <TodoTask
                             task={task}
-                            key={key}
+                            key={task.id}
                             tasks={tasks}
                             setTasks={setTasks}
                             completedTasks={handleCompletedTasks}
@@ -59,7 +60,7 @@ const TodoList: React.FC<ITodoListProps> = ({ tasks, setTasks }) => {
                     .map((task: ITask, key: number) => (
                         <TodoTask
                             task={task}
-                            key={key}
+                            key={task.id}
                             tasks={tasks}
                             setTasks={setTasks}
                             completedTasks={handleCompletedTasks}

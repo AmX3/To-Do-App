@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import "./App.css";
 import theme from "./theme";
@@ -15,18 +15,32 @@ const App: React.FC = () => {
     const [task, setTask] = useState<string>("");
     const [tasks, setTasks] = useState<ITask[]>([]);
 
-    // In addtask, if tasks input is empty, we do nothing, else we add our new task (object) to our array of tasks in todoList
-    const handleAddTask = () => {
-        const newTask = { id: Date.now(), task, isCompleted: false };
-        if (task.length == 0) {
-            return;
-        } else {
-            setTasks([...tasks, newTask]);
-            // reset input field after every submit
-            setTask("");
-        }
+    // Fetch data from our backend server. Convert into json format
+    const fetchData = async () => {
+        const BASE_URL = "http://localhost:8080/todos";
+        const response = await fetch(BASE_URL);
+        const data = await response.json();
+        setTasks(data);
+        console.log(data);
     };
-    // basename = "/E-Commerce-React-Application";
+
+    useEffect(() => {
+        if (tasks) {
+            fetchData();
+        }
+    }, []);
+
+    // In addtask, if tasks input is empty, we do nothing, else we add our new task (object) to our array of tasks in todoList
+    // const handleAddTask = () => {
+    //     const newTask = { id: Date.now(), tasks, isCompleted: false };
+    //     if (task.length == 0) {
+    //         return;
+    //     } else {
+    //         setTasks([...tasks, newTask]);
+    //         // reset input field after every submit
+    //         setTask("");
+    //     }
+    // };
     return (
         <>
             <ThemeProvider theme={theme}>
@@ -34,11 +48,11 @@ const App: React.FC = () => {
                 <StyledMain>
                     <StyledCard>
                         <Heading>TODOLIST</Heading>
-                        <InputField
+                        {/* <InputField
                             task={task}
                             setTask={setTask}
                             handleAddTask={handleAddTask}
-                        />
+                        /> */}
                         <TodoList tasks={tasks} setTasks={setTasks} />
                     </StyledCard>
                 </StyledMain>

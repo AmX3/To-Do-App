@@ -33,7 +33,7 @@ const TodoTask: React.FC<ITodoTaskProps> = ({
                             checked={task.isCompleted}
                             onChange={() => completedTasks(task.id)}
                         />
-                        <s> {task.task}</s>
+                        <s> {task.name}</s>
                     </Task>
                 ) : (
                     <Task isCompleted={task.isCompleted}>
@@ -42,7 +42,7 @@ const TodoTask: React.FC<ITodoTaskProps> = ({
                             checked={task.isCompleted}
                             onChange={() => completedTasks(task.id)}
                         />
-                        {task.task}
+                        {task.name}
                     </Task>
                 )}
 
