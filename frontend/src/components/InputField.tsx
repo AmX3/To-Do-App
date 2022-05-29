@@ -22,11 +22,15 @@ const InputField: React.FC<INewTaskProps> = ({
         setTask(e.target.value);
     };
 
-    const handleSubmit = (e: React.SyntheticEvent) => {
+    // // // In addtask, if tasks input is empty, we do nothing, else we add our new task (object) to our array of tasks in todoList
+
+    const handleAddNewTask = (e: React.SyntheticEvent) => {
         e.preventDefault();
         const newTask = { id: Date.now(), name: task, isCompleted: false };
+        if (task.length == 0 || task.length == null) return;
         setTasks([...tasks, newTask]);
         console.log(tasks);
+
         fetch("http://localhost:8080/todos", {
             method: "POST",
             mode: "cors",
@@ -38,30 +42,8 @@ const InputField: React.FC<INewTaskProps> = ({
         setTask("");
     };
 
-    // // // In addtask, if tasks input is empty, we do nothing, else we add our new task (object) to our array of tasks in todoList
-    // const handleAddTask = async () => {
-    //     const newTask = { name: "" };
-    //     if (task.length == 0) {
-    //         return;
-    //     } else {
-    //         fetch("http://localhost:8080/todos", {
-    //             method: "POST",
-    //             mode: "cors",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify(newTask),
-    //         });
-    //         console.log(newTask);
-    //         setTask("");
-    //         const response = await fetch("http://localhost:8080/todos");
-    //         const data = await response.json();
-    //         return data;
-    //     }
-    // };
-
     return (
-        <Container onSubmit={handleSubmit}>
+        <Container>
             <Input
                 type="text"
                 value={task}
@@ -73,7 +55,7 @@ const InputField: React.FC<INewTaskProps> = ({
                     type="submit"
                     icon={faCirclePlus}
                     size={"lg"}
-                    // onClick={() => handleAddTask()}
+                    onClick={handleAddNewTask}
                 />
             </Icon>
         </Container>

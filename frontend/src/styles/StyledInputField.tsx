@@ -22,7 +22,7 @@ export const Input = styled.input`
     font-size: 16px;
 `;
 
-export const Icon = styled.button`
+export const Icon = styled.div`
     & * {
         color: ${(props: InputProps) => props.theme.colors["lightred"]};
         transition: all 0.3s;
