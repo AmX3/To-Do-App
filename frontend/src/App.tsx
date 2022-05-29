@@ -8,8 +8,11 @@ import { StyledCard, Heading } from "./styles/StyledCard";
 import { StyledMain } from "./styles/StyledMain";
 import { useState } from "react";
 import { ITask } from "./interfaces/interface";
-import TodoList from "./components/TodoList";
+// import TodoList from "./components/TodoList";
 import InputField from "./components/InputField";
+import { addNewTask } from "./services/apiService";
+import { number, string } from "prop-types";
+import TodoList from "./components/TodoList";
 
 const App: React.FC = () => {
     const [task, setTask] = useState<string>("");
@@ -24,23 +27,11 @@ const App: React.FC = () => {
         console.log(data);
     };
 
+    // Retrieves data from our backend server and updates our page
     useEffect(() => {
-        if (tasks) {
-            fetchData();
-        }
+        fetchData();
     }, []);
 
-    // In addtask, if tasks input is empty, we do nothing, else we add our new task (object) to our array of tasks in todoList
-    // const handleAddTask = () => {
-    //     const newTask = { id: Date.now(), tasks, isCompleted: false };
-    //     if (task.length == 0) {
-    //         return;
-    //     } else {
-    //         setTasks([...tasks, newTask]);
-    //         // reset input field after every submit
-    //         setTask("");
-    //     }
-    // };
     return (
         <>
             <ThemeProvider theme={theme}>
@@ -48,12 +39,17 @@ const App: React.FC = () => {
                 <StyledMain>
                     <StyledCard>
                         <Heading>TODOLIST</Heading>
-                        {/* <InputField
+                        <InputField
                             task={task}
                             setTask={setTask}
-                            handleAddTask={handleAddTask}
-                        /> */}
-                        <TodoList tasks={tasks} setTasks={setTasks} />
+                            setTasks={setTasks}
+                            tasks={tasks}
+                        />
+                        <TodoList
+                            tasks={tasks}
+                            setTasks={setTasks}
+                            task={task}
+                        />
                     </StyledCard>
                 </StyledMain>
             </ThemeProvider>

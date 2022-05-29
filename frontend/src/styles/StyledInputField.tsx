@@ -5,7 +5,7 @@ interface InputProps {
     theme: ITheme;
 }
 
-export const Container = styled.div`
+export const Container = styled.form`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,7 +22,7 @@ export const Input = styled.input`
     font-size: 16px;
 `;
 
-export const Icon = styled.div`
+export const Icon = styled.button`
     & * {
         color: ${(props: InputProps) => props.theme.colors["lightred"]};
         transition: all 0.3s;
