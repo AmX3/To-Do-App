@@ -20,7 +20,7 @@ public class TodoItem implements Serializable {
 	@Column
 	private String name;
 	@Column
-	private Boolean isCompleted;
+	private Boolean isCompleted = Boolean.FALSE;
 	
 	public TodoItem() {}
 	

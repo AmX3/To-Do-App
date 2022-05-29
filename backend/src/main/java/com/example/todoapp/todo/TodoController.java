@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -19,7 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.todoapp.dtos.TodoItemPatchDTO;
 import com.example.todoapp.dtos.TodoItemPostDTO;
-
+//Required to fetch from front-end local host on another port.
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/todos")
 public class TodoController {
@@ -27,6 +29,8 @@ public class TodoController {
 //	injection of service provider into rest controller
 	@Autowired
 	TodoService service;
+	
+	
 	
 	@GetMapping
 	public List<TodoItem> all(){
@@ -57,7 +61,7 @@ public class TodoController {
 		return new ResponseEntity<>(todoitem, HttpStatus.OK);
 	}
 	
-	@PatchMapping(value = "{id}")
+	@PatchMapping(value = "/{id}")
 	public ResponseEntity<TodoItem> update(@PathVariable Long id, @RequestBody TodoItemPatchDTO data){
 //		Creates a new instance of the entity based on the id and existing data
 		Optional<TodoItem> maybeTodoItem = this.service.update(id, data);

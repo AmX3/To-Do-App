@@ -23,7 +23,7 @@ public class TodoService {
 	}
 
 	public Optional<TodoItem> find(Long id) {
-		// TODO Auto-generated method stub
+
 		return this.repository.findById(id);
 	}
 
