@@ -76,7 +76,7 @@ public class TodoController {
 	}
 	
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity delete(@PathVariable Long id){
+	public ResponseEntity<Void> delete(@PathVariable Long id){
 //		Is true, if id is found
 		Boolean found = this.service.delete(id);
 		
