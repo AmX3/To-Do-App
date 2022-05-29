@@ -7,39 +7,32 @@ import { fetchData } from "../services/apiService";
 
 // here we define the properties that our todotask(an object) will have
 interface ITodoTaskProps {
-    // task: ITask;
-    // tasks: ITask[];
-    // setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
-    // completedTasks: (taskId: number) => void;
+    task: ITask;
+    tasks: ITask[];
+    setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
+    completedTasks: (id: number) => void;
 }
 
-const TodoTask: React.FC<ITodoTaskProps> = (
-    {
-        // task,
-        // tasks,
-        // setTasks,
-        // completedTasks,
-    }
-) => {
+const TodoTask: React.FC<ITodoTaskProps> = ({
+    task,
+    tasks,
+    setTasks,
+    completedTasks,
+}) => {
     // // Filtering through our todo list and will only return back tasks that have not been deleted. If task name matches our soon to be deleted task, it will delete task.
-    // const handleDeleteTask = async () => {
-    //     await deleteTask(task.id);
-    //     fetchData();
-    // };
-    const handleDeleteTask = async (id: number) => {
+    const handleDeleteTask = (id: number) => {
+        const updatedTodos = [...tasks].filter((task) => task.id !== id);
         fetch(`http://localhost:8080/todos/${id}`, {
             method: "DELETE",
             mode: "cors",
-            headers: {
-                "Content-Type": "application/json",
-            },
         });
+        setTasks(updatedTodos);
     };
 
     return (
         <div>
             <Container>
-                {/* {task.isCompleted ? (
+                {task.isCompleted ? (
                     <Task isCompleted={task.isCompleted}>
                         <Checkbox
                             type="checkbox"
@@ -65,7 +58,7 @@ const TodoTask: React.FC<ITodoTaskProps> = (
                         icon={faTrashCan}
                         onClick={() => handleDeleteTask(task.id)}
                     />
-                </Icon> */}
+                </Icon>
             </Container>
         </div>
     );
